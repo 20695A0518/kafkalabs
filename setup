@@ -1,0 +1,41 @@
+Cassandra - windows setup
+=========================
+ 
+1. Requires Python version 2.7.8 and jdk version 1.8
+2. apache-cassandra version 3.11.9
+
+
+Mysql - windows setup
+=====================
+
+For windows : Download mysql from the below location:
+				|_https://dev.mysql.com/downloads/mysql/
+ 					   |_ (mysql-8.0.28-winx64.zip)
+		
+
+1. mysqld.exe --initialize --console
+[take the temporary password]
+
+2. mysqld.exe
+
+mysql client:
+mysql -uroot -p
+password: temporary password
+
+>ALTER USER 'root'@'localhost' IDENTIFIED BY 'root'
+
+mysql client connect :
+mysql -uroot -proot
+
+
+Gradle setup
+============
+
+1. Set the the below environment varilables
+GRADLE_USER_HOME  :  ...\GradleRepo
+PATH :  ..\Gradle\bin
+
+2. Eclipse project name and seetings.gradle, rootProject.name must be same
+
+3. After updating the project, Refresh the Gradle Project
+
