@@ -1,0 +1,18 @@
+1. To check the status of the confluent server
+./confluent  local services status
+
+2. To start the confluent server
+./confluent  local services start
+
+3. To access webconsole
+http://localhost:9021/
+
+
+
+Connector Architecture
+======================
+To get File Source/Sink Connector
+Copy connect-file-7.0.1-ce.jar from  confluent-7.0.1/share/filestream-connectors to 
+/home/ubuntu/Desktop/kafka/confluent-7.0.1/share/java/kafka
+
+
