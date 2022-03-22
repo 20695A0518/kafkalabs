@@ -9,6 +9,9 @@ kafka-server-stop.bat  ../../config/server.properties
 3. Create a topic with 3 partitions
 kafka-topics.bat --bootstrap-server localhost:9092 --create --topic first-topic --partitions 3
 
+Describe a topic
+kafka-topics --bootstrap-server localhost:9092 --describe --topic first-topic
+
 4. Kafka console producer
 kafka-console-producer.bat --bootstrap-server localhost:9092 --topic  first-topic
 
