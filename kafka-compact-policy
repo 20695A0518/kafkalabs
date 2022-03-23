@@ -1,0 +1,9 @@
+kafka-topics.bat --bootstrap-server localhost:9092 --create --topic emp-salary --partitions 1 --replication-factor 1 ^
+--config cleanup.policy=compact --config min.cleanable.dirty.ratio=0.001 ^
+--config segment.ms=5000
+
+kafka-console-consumer.bat  --bootstrap-server localhost:9092 --topic ^
+emp-salary --property print.key=true --property key.separator=,  --from-beginning 
+
+kafka-console-producer.bat  --broker-list localhost:9092 --topic emp-salary ^
+--property parse.key=true --property key.separator=,
