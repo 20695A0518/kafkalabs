@@ -3,6 +3,11 @@ connect-standalone.bat ..\..\config\connect-standalone.properties connector1.pro
 connect-standalone.bat ..\..\config\connect-standalone.properties ..\..\config\connect-file-source.properties  ..\..\config\connect-file-sink.properties
 
 
+adding the data to test.txt
+===========================
+echo first > test.txt
+echo second >> test.txt
+
 
 Kafka Connect : test.sink.txt is not getting updated
 ====================================================
