@@ -114,12 +114,18 @@ server.1=localhost:2666:3666
 server.2=localhost:2667:3667
 server.3=localhost:2668:3668
 
-3. Start Zookeeper instances
+3. Create Unique Zookeeper Id on Individual Nodes
+On node1, create a unique zookeeper id and store it in the “myid” file that should be located under the directory that is 
+specified by the “dataDir” in zoo.cfg.
+
+On node1, the unique id will be “1”, which will be stored in the /zookeeper../myid file.
+
+4a. Start Zookeeper instances
 > bin/zookeeper-server-start.bat config/zookeeper1.properties
 > bin/zookeeper-server-start.bat config/zookeeper2.properties
 > bin/zookeeper-server-start.bat config/zookeeper3.properties
 
-4.Start Kafka servers
+4b.Start Kafka servers
 > bin/kafka-server-start.bat config/server1.properties
 > bin/kafka-server-start.bat config/server2.properties
 > bin/kafka-server-start.bat config/server3.properties
