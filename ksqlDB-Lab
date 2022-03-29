@@ -1,3 +1,7 @@
+ksqlDB is a new kind of database purpose-built for stream processing apps, allowing users to build stream processing 
+applications against data in Apache Kafka® and enhancing developer productivity.
+
+
 Creating a New Stream
 =====================
 
