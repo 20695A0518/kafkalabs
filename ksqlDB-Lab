@@ -62,7 +62,7 @@ CREATE STREAM high_readings AS
     WHERE reading > 41
     EMIT CHANGES;
     
-    
+
 Combining Stream Operations into One
 ====================================
 
@@ -79,5 +79,90 @@ CREATE STREAM high_pri AS
 We can bypass the multiple streams by combining operations into a single new stream with more SQL.
 
 
+Push Query
+==========
 
-    
+This type of query pushes a continuous stream of updates to the client. These queries are particularly suitable for 
+asynchronous application flows as they enable the clients to react to new information in real-time.
+
+However, unlike persistent queries, the server does not store the results of such queries in a Kafka topic.
+
+SELECT * FROM clean  WHERE reading > 41 EMIT CHANGES;
+
+
+
+Client Code
+============
+
+Add the dependency for the client:
+
+<dependency>
+    <groupId>io.confluent.ksql</groupId>
+    <artifactId>ksqldb-api-client</artifactId>
+    <version>6.2.0</version>
+</dependency>
+
+
+An instance of the Client with ksqlDB server connection details and use this to execute our SQL statement:
+
+ClientOptions options = ClientOptions.create()
+  .setHost(KSQLDB_SERVER_HOST)
+  .setPort(KSQLDB_SERVER_PORT);
+
+Client client = Client.create(options);
+
+Map<String, Object> properties = Collections.singletonMap(
+  "auto.offset.reset", "earliest"
+);
+
+CompletableFuture<ExecuteStatementResult> result = 
+  client.executeStatement(CREATE_READINGS_STREAM, properties);
+
+Inserting Sample Data
+=====================
+
+List<KsqlObject> rows = Arrays.asList(
+  new KsqlObject().put("sensor_id", "sensor-1")
+    .put("timestamp", "2021-08-01 09:00:00").put("reading", 22),
+  new KsqlObject().put("sensor_id", "sensor-1")
+    .put("timestamp", "2021-08-01 09:10:00").put("reading", 20),
+  new KsqlObject().put("sensor_id", "sensor-2")
+    .put("timestamp", "2021-08-01 10:00:00").put("reading", 26),
+  
+  // additional rows
+);
+
+CompletableFuture<Void> result = CompletableFuture.allOf(
+  rows.stream()
+    .map(row -> client.insertInto(READINGS_TABLE, row))
+    .toArray(CompletableFuture[]::new)
+);
+
+
+Push Query
+==========
+
+String ALERTS_QUERY = "SELECT * FROM alerts EMIT CHANGES";
+
+public CompletableFuture<Void> subscribeOnAlerts(Subscriber<Row> subscriber) {
+    return client.streamQuery(ALERTS_QUERY, PROPERTIES)
+      .thenAccept(streamedQueryResult -> streamedQueryResult.subscribe(subscriber))
+      .whenComplete((result, ex) -> {
+          if (ex != null) {
+              log.error("Alerts push query failed", ex);
+          }
+      });
+}
+
+
+Pull Query
+==========
+
+pull queries are well suited to synchronous request/response application flows.
+
+Create a query to retrieve all the alerts triggered for a particular sensor id:
+
+String pullQuery = "SELECT * FROM alerts WHERE sensor_id = 'sensor-2';";
+
+List<Row> rows = client.executeQuery(pullQuery, PROPERTIES).get()
+
