@@ -1,6 +1,11 @@
 ksqlDB is a new kind of database purpose-built for stream processing apps, allowing users to build stream processing 
 applications against data in Apache Kafka® and enhancing developer productivity.
 
+ksqlDB can be described as a real-time event-streaming database built on top of Apache Kafka and Kafka Streams. 
+It combines powerful stream processing with a relational database model using SQL syntax.
+
+ksqlDB is an event streaming database, streams and tables are its core abstractions. Essentially, these are collections of 
+data that can be transformed and processed in real-time.
 
 Creating a New Stream
 =====================
@@ -165,4 +170,34 @@ Create a query to retrieve all the alerts triggered for a particular sensor id:
 String pullQuery = "SELECT * FROM alerts WHERE sensor_id = 'sensor-2';";
 
 List<Row> rows = client.executeQuery(pullQuery, PROPERTIES).get()
+
+
+Creating the Materialized View using TABLE
+===========================================
+
+We can derive a new alerts table from the readings stream. This persistent query (or materialized view) runs on the server 
+indefinitely  and processes events from the source stream or table.
+
+The below statment should raise an alert when the average reading, per sensor, exceeds a value of 25 over a 30-minute period:
+
+CREATE TABLE alerts AS
+  SELECT
+    sensor_id,
+    TIMESTAMPTOSTRING(WINDOWSTART, 'yyyy-MM-dd HH:mm:ss', 'UTC') 
+      AS start_period,
+    TIMESTAMPTOSTRING(WINDOWEND, 'yyyy-MM-dd HH:mm:ss', 'UTC') 
+      AS end_period,
+    AVG(reading) AS average_reading
+  FROM readings
+  WINDOW TUMBLING (SIZE 30 MINUTES)
+  GROUP BY id 
+  HAVING AVG(reading) > 25
+  EMIT CHANGES;
+  
+We're aggregating new incoming events in a tumbling window of 30 minutes, per sensor. We've also used the TIMESTAMPTOSTRING function to 
+convert the UNIX timestamp into something more readable.
+
+Importantly, the materialized view only updates with data when the new event successfully integrates with the aggregation function.
+
+
 
