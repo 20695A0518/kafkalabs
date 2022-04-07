@@ -10,7 +10,11 @@ can be transmitted to the server then this buffer space will be exhausted. When 
 will block. The threshold for time to block is determined by max.block.ms after which it throws a TimeoutException.
 
 Increase the buffer.memory(default:32 MB)  of  max.block.ms (default: 60000ms)
-
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 100);
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG,  16_384 * 4);
+        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, 33554432);
+        props.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 60000);
+        props.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
 
 
 
