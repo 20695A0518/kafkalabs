@@ -1,3 +1,20 @@
+
+To install Confluent server:
+
+1. download confluent server (local - zip/tar)
+
+2. To install concluent CLI tool:
+curl -L https://cnfl.io/cli | sh -s -- -b /<path-to-directory>/bin
+* Run the command  in confluent/bin directory
+
+3. in /etc/profile. add the below entries
+export CONFLUENT_HOME=/home/ubuntu/Desktop/kafka/confluent-7.0.1
+export CONFLUENT_CURRENT="/home/ubuntu/Desktop/kafka/logs"
+
+4. to start confluent server
+./confluent local services start
+
+
 1. To check the status of the confluent server
 ./confluent  local services status
 
