@@ -32,5 +32,5 @@ kafka-console-consumer.bat --bootstrap-server localhost:9092 --max-messages 1  -
 
 
 10. kafka send they records with key and value
-kafka-console-producer.bat --broker-list localhost:9092 --topic test --property "parse.key=true" --property "key.separator=:"
+kafka-console-producer.bat --bootstrap-server localhost:9092 --topic test --property "parse.key=true" --property "key.separator=:"
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --property print.key=true --property key.separator=":" --from-beginning
