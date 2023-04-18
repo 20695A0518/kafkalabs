@@ -1,6 +1,6 @@
 
 A timestamp representing an absolute time, without timezone information. The corresponding Java type is a java.util.Date. 
-The underlying representation is a long representing the number of milliseconds since Unix epoch(acr)onym
+The underlying representation is a long representing the number of milliseconds since Unix epoch(acronym) - Universal Time Coordinated (UTC)
 
 
 
