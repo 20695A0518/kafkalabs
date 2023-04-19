@@ -42,6 +42,6 @@ ssl.truststore.password=clientpass
 
 6. TEST the consumer and producer 
 
-./kafka-console-producer.sh  --bootstrap-server localhost:9093 --topic kafka-security-topic --producer.config client.properties
+./kafka-console-producer  --bootstrap-server localhost:9093 --topic kafka-security-topic --producer.config client.properties
 
-./kafka-console-consumer.sh --bootstrap-server localhost:9093 --topic kafka-security-topic --consumer.config client.properties --from-beginning
+./kafka-console-consumer --bootstrap-server localhost:9093 --topic kafka-security-topic --consumer.config client.properties --from-beginning
