@@ -20,5 +20,6 @@ password.properties
 ramana:ramana,Administrators
 
 3. from terminal run the below command:
-CONTROL_CENTER_OPTS="-Djava.security.auth.login.config=propertyfile.jaas" ./confluent local services control-center start 
+set CONTROL_CENTER_OPTS="-Djava.security.auth.login.config=propertyfile.jaas" 
+./confluent local services control-center start 
 
