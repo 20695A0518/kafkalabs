@@ -1,1 +1,5 @@
+To run the producer:
+./kafka-console-producer --bootstrap-server localhost:9092 --topic first-topic
+
+To view the log file:
 ./kafka-run-class kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files /home/ubuntu/Desktop/kafka/logs/confluent.936322/kafka/data/first-topic-0/00000000000000000000.log
