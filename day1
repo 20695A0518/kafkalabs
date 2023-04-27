@@ -1,0 +1,1 @@
+./kafka-run-class kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files /home/ubuntu/Desktop/kafka/logs/confluent.936322/kafka/data/first-topic-0/00000000000000000000.log
