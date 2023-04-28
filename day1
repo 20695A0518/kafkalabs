@@ -6,3 +6,13 @@ To view the log file:
 
 To run the consumer:
 ./kafka-console-consumer --bootstrap-server localhost:9092 --topic first-topic --group fg1 --from-beginning
+
+
+Kafka Consumer group commands:
+To describe the group details:
+./kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group KafkaExampleConsumer
+
+To reset the group to earliest:
+./kafka-consumer-groups --bootstrap-server localhost:9092 --group KafkaExampleConsumer --reset-offsets --to-earliest --execute --topic day2-topic
+
+
