@@ -2,7 +2,7 @@ sh zookeeper-server-start.sh ../config/zookeeper.properties
 
 sh kafka-server-start.sh ../config/server.properties
 
-kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first-topic --partitions 2
+sh kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first-topic --partitions 2
 
 
 
