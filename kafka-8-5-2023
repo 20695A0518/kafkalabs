@@ -8,6 +8,8 @@ sh kafka-topics.sh --bootstrap-server localhost:9092 --describe  --topic first-t
 
 sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first-topi
 
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first-topic --group fg1 --from-beginning
+
 ===============
 Default ports:
 zookeeper : 2181
