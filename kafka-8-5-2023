@@ -43,3 +43,10 @@ describe tg2 group
 sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group tg1 --reset-offsets --to-earliest --execute --topic test-topic
 
 sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --group tg1 --from-beginning
+
+
+To get a detailed description about the log file, use a tool kafka-run-class:
+
+sh kafka-run-class.sh kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files  /tmp/kafka-logs/test-topic-0/00000000000000000000.log
+
+
