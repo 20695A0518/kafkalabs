@@ -15,3 +15,31 @@ Default ports:
 zookeeper : 2181
 kafka : 9092
 ================
+
+
+Consumer group demo:
+
+
+sh kafka-topics.sh --bootstrap-server localhost:9092 --create --topic  test-topic --partitions 1
+
+sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test-topic
+
+sh kafka-run-class.sh  kafka.tools.GetOffsetShell  --bootstrap-server localhost:9092 --topic test-topic
+
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --group tg1 --from-beginning
+
+sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group tg1
+
+
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --group tg2  
+
+sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group tg2
+
+stop tg1
+send few messages
+describe tg1 group
+describe tg2 group
+
+sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group tg1 --reset-offsets --to-earliest --execute --topic test-topic
+
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --group tg1 --from-beginning
