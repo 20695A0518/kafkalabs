@@ -1,6 +1,32 @@
+Apache Kafka Software:
+----------------------
 sh zookeeper-server-start.sh ../config/zookeeper.properties
 
 sh kafka-server-start.sh ../config/server.properties
+
+Confluent Kafka Software:
+------------------------
+
+./zookeeper-server-start  ../etc/kafka/zookeeper.properties
+./kafka-server-start ../etc/kafka/server.properties
+
+Confluent cLI
+-------------
+1. To display all the available services
+./confluent local services
+
+2. To start zookeeper service
+./confluent local services zookeeper start
+
+3. To start kafka service
+./confluent local services kafka start
+
+4. To start all services
+./confluent local services start
+
+
+Other commands:  include sh while using kafka software,  ./ and without sh for conflutent software
+---------------
 
 sh kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first-topic --partitions 2
 
