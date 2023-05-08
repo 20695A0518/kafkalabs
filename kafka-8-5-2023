@@ -6,6 +6,7 @@ sh kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first-topi
 
 sh kafka-topics.sh --bootstrap-server localhost:9092 --describe  --topic first-topic
 
+sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first-topi
 
 ===============
 Default ports:
