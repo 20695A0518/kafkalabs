@@ -1,1 +1,3 @@
 sh kafka-configs.sh --bootstrap-server localhost:9092,localhost:9093 --entity-type topics --entity-name cluster-topic --add-config min.insync.replicas=3 --alter
+
+ sh kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic cluster-topic
