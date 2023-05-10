@@ -66,4 +66,12 @@ Default:	2147483647
 retry.backoff.ms
 By default, the producer will wait 100ms between retries, but you can control this using the retry.backoff.ms parameter
 
+max.in.flight.requests.per.connection
+Allowing retries without setting max.in.flight.requests.per.connection to 1 will potentially change the ordering of records because if two batches are sent to a
+single partition, and the first fails and is retried but the second succeeds, then the records in the second batch may appear first. If you rely on key-based ordering, 
+that can be an issue. By limiting the number of in-flight requests to 1 (default being 5), i.e., max.in.flight.requests.per.connection = 1, we can guarantee that Kafka 
+will preserve message order in the event that some messages will require multiple retries before they are successfully acknowledged.
+
+
+
 
