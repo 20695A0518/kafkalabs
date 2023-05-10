@@ -56,3 +56,14 @@ If a follower is lagging by more than this amount of time, it will trigger a reb
 The default value is 10,000 ms (10 seconds), but it can be increased or decreased based on the expected replication delay and the desired consistency level.
 
 
+Producer retry property:
+-------------------------
+
+retry:
+Type:	int
+Default:	2147483647
+
+retry.backoff.ms
+By default, the producer will wait 100ms between retries, but you can control this using the retry.backoff.ms parameter
+
+
