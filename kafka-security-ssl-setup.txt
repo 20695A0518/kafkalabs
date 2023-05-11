@@ -45,3 +45,9 @@ ssl.truststore.password=clientpass
 sh kafka-console-producer.sh  --bootstrap-server localhost:9093 --topic kafka-security-topic --producer.config client.properties
 
 sh kafka-console-consumer.sh --bootstrap-server localhost:9093 --topic kafka-security-topic --consumer.config client.properties --from-beginning
+
+zookeeper security:
+
+Ref: https://docs.confluent.io/platform/current/security/security_tutorial.html#generating-keys-certs
+
+
