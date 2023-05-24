@@ -23,5 +23,5 @@ For spring properties file:
         auto.register.schemas:true
 Rest call:
 http://localhost:8081/subjects/<topic-name>-value/versions
-http://localhost:8081/subjects/Employee/versions/2
+http://localhost:8081/subjects/mysql-foobar-value/versions/1 | jq
 http://localhost:8081/subjects/Employee/versions/latest"
