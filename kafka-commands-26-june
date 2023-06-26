@@ -25,3 +25,14 @@ sh kafka-run-class.sh  kafka.tools.DumpLogSegments --deep-iteration --print-data
 
 8.To get End offset details for each partition
 sh kafka-run-class.sh  kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic first-topic
+
+9. To stop kafka server
+sh kafka-server-stop.sh 
+
+10. To stop zookeeper server
+sh zookeeper-server-stop.sh
+
+
+
+
+
