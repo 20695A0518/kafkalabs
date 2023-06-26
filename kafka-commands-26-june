@@ -23,3 +23,5 @@ sh kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic first-to
 7. To get a detailed description about the log file, use a tool kafka-run-class
 sh kafka-run-class.sh  kafka.tools.DumpLogSegments --deep-iteration --print-data-log  --files /tmp/kafka-logs/first-topic-0/00000000000000000000.log
 
+8.To get End offset details for each partition
+sh kafka-run-class.sh  kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic first-topic
