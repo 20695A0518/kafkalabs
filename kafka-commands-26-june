@@ -36,6 +36,9 @@ sh zookeeper-server-stop.sh
 ./confluent local services start
 (this will start 7 services)
 
+* Control center -> default port -> 9021
+To access control-centre ->  http://localhost:9021/clusters
+
 12. To start only zookeeper and kafka
 ./confluent local services zookeeper start
 ./confluent local services kafka start
