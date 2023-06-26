@@ -32,6 +32,17 @@ sh kafka-server-stop.sh
 10. To stop zookeeper server
 sh zookeeper-server-stop.sh
 
+11. To start all the confluent services
+./confluent local services start
+(this will start 7 services)
+
+12. To start only zookeeper and kafka
+./confluent local services zookeeper start
+./confluent local services kafka start
+
+
+
+
 
 
 
