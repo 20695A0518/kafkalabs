@@ -11,5 +11,9 @@ default port: 9092
 3. To create a topic
 sh kafka-topics.sh --bootstrap-server localhost:9092  --create --topic first-topic --partitions 1 --replication-factor 1
 
+4. To Describe the topic
+sh kafka-topics.sh --bootstrap-server localhost:9092  --describe  --topic first-topic 
+
+
 
 
