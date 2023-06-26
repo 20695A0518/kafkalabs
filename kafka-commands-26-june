@@ -1,0 +1,15 @@
+1. To Start Zookeeper
+sh zookeeper-server-start.sh ../config/zookeeper.properties
+
+default port : 2181
+
+2. To Start Kafka Server
+sh kafka-server-start.sh ../config/server.properties 
+
+default port: 9092
+
+3. To create a topic
+sh kafka-topics.sh --bootstrap-server localhost:9092  --create --topic first-topic --partitions 1 --replication-factor 1
+
+
+
