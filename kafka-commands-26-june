@@ -17,4 +17,5 @@ sh kafka-topics.sh --bootstrap-server localhost:9092  --describe  --topic first-
 5. To produce a message
 sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first-topic
 
-
+6. To consume the messages from the beginning
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic first-topic --from-beginning
