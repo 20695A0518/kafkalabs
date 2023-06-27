@@ -43,6 +43,10 @@ To access control-centre ->  http://localhost:9021/clusters
 ./confluent local services zookeeper start
 ./confluent local services kafka start
 
+13. To display consumer group information
+./kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group cg1
+
+
 
 
 
