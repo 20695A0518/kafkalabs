@@ -73,5 +73,14 @@ Importance:	medium
 Update Mode:	cluster-wide
 
 
+consumer group : heartbeat
+
+If a consumer fails to send a heartbeat within a predefined timeout period, the broker considers it as inactive or failed. The group coordinator 
+then initiates a rebalance process to reassign the partitions of the failed consumer to the remaining active consumers in the group.
+
+The heartbeat interval is configurable and can be set by the consumer using the heartbeat.interval.ms property. By default, it is set to 
+3 seconds in the Kafka consumer configuration. The timeout for detecting an unresponsive consumer is controlled by the broker-side configuration 
+parameter session.timeout.ms (default: 10 seconds) and max.poll.interval.ms (default: 5 minutes).
+
 
 
