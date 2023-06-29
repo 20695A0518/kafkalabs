@@ -79,16 +79,16 @@ sh kafka-server-start.sh ../config/server.properties
 
 6. run the below commands
 
-./kafka-acls.sh --bootstrap-server localhost:9093 --command-config client-ssl-auth.properties --add --allow-principal 
+./kafka-acls.sh --bootstrap-server localhost:9093 --command-config client-ssl-auth.properties --add --allow-principal \
  User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX  --operation Create --topic acltest
 
-./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal  User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX 
+./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal  User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX \
 --consumer --topic acltest --group acl-consumer --command-config client-ssl-auth.properties
 
-./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal User:"CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX" 
+./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal User:"CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX" \
 --producer --topic acltest --group acl-consumer --command-config client-ssl-auth.properties
 
-sh kafka-console-producer.sh --bootstrap-server localhost:9093  --topic actltest   --producer.config client-ssl-auth.properties
+sh kafka-console-producer.sh --bootstrap-server localhost:9093  --topic acltest   --producer.config client-ssl-auth.properties
 
-sh kafka-console-consumer.sh --bootstrap-server localhost:9093 --consumer.config  client-ssl-auth.properties   --topic actltest --from-beginning
+sh kafka-console-consumer.sh --bootstrap-server localhost:9093 --consumer.config  client-ssl-auth.properties   --topic acltest --from-beginning
 
