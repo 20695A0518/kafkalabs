@@ -45,9 +45,7 @@ keytool -keystore kafka.server.truststore.jks -alias $USERNAME -import -file cer
 
 listeners=SSL://:9093
 advertised.listeners=SSL://localhost:9093
-zookeeper.connect=localhost:2181
 listener.security.protocol.map=SSL:SSL
-
 security.protocol=SSL
 security.inter.broker.protocol=SSL
 ssl.keystore.type=JKS
