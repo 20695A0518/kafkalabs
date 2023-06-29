@@ -59,7 +59,7 @@ ssl.truststore.location=/home/ubuntu/Desktop/kafka/ssl/kafka.server.truststore.j
 ssl.truststore.password=kafka@123
 authorizer.class.name=kafka.security.authorizer.AclAuthorizer
 allow.everyone.if.no.acl.found=false
-super.users=User:CN=localhost,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX
+super.users=User:CN=localhost,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX;User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX
 ssl.client.auth=required
 ssl.enabled.protocols=TLSv1.2,TLSv1.1,TLSv1
 
@@ -72,15 +72,25 @@ ssl.keystore.location=/home/ubuntu/Desktop/kafka/ssl/kafka.client.keystore.jks
 ssl.keystore.password=client@123 
 ssl.key.password=client@123
 
+4. Start Zookeeper
+sh zookeeper-server-start.sh ../config/zookeeper.properties
 
-4. run the below commands
 
-./kafka-acls.sh --bootstrap-server localhost:9093 --command-config client-ssl-auth.properties --add --allow-principal User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX  --operation Create --topic acltest
+5. Start Kafka Server
+sh kafka-server-start.sh ../config/server.properties 
+
+6. run the below commands
+
+./kafka-acls.sh --bootstrap-server localhost:9093 --command-config client-ssl-auth.properties --add --allow-principal 
+ User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX  --operation Create --topic acltest
+
+./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal  User:CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX 
+--consumer --topic acltest --group acl-consumer --command-config client-ssl-auth.properties
 
 ./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal User:"CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX" 
---consumer --topic acltest --group acl-consumer --consumer.config client-ssl-auth.properties
+--producer --topic acltest --group acl-consumer --command-config client-ssl-auth.properties
 
-./kafka-acls.sh --bootstrap-server localhost:9093  --add  --allow-principal User:"CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX" 
---producer--topic acltest --group acl-consumer --producer.config client-ssl-auth.properties
+sh kafka-console-producer.sh --bootstrap-server localhost:9093  --topic actltest   --producer.config client-ssl-auth.properties
 
+sh kafka-console-consumer.sh --bootstrap-server localhost:9093 --consumer.config  client-ssl-auth.properties   --topic actltest --from-beginning
 
