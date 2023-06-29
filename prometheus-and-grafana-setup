@@ -21,8 +21,7 @@ sudo systemctl restart grafana-server
     (In Dashboard -> New -> import -> https://grafana.com/grafana/dashboards/721 ; select datasource -> Prometheus)
     
     
-    
-Ref: https://onehandcoder.com/monitoring-apache-kafka-metrics-using-prometheus-and-grafana/
+
 
 
 
