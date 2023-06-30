@@ -103,3 +103,15 @@ sh kafka-console-producer.sh --bootstrap-server localhost:9093  --topic acltest 
 
 sh kafka-console-consumer.sh --bootstrap-server localhost:9093 --consumer.config  client-ssl-auth.properties   --topic acltest --from-beginning
 
+* For example, in the command --allow-principal User:"CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX", the ACL rule allows the principal with the DN "CN=acladmin,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX" to perform certain actions. In this case, the DN represents the user's identity extracted from the SSL certificate.
+
+* ACL rules in Kafka can be grouped together under a common name or label. This allows for easier management and organization of ACLs, especially 
+when there are multiple rules to be defined.
+
+In the given command, --group acl-consumer is used to assign the ACL rule to a group named "acl-consumer". This group label can be used for 
+organizational purposes, grouping related ACL rules together. 
+
+To check the ACL groups defined in Apache Kafka, you can use the kafka-acls.sh script with the --list option. Here's the command:
+
+sh kafka-acls.sh --bootstrap-server localhost:9093 --list --command-config client-ssl-auth.properties
+
