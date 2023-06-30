@@ -1,5 +1,7 @@
 1. copy jmx_prometheus_javaagent-0.18.0.jar and kafka-3_0_0.yml in bin directory
-2. export  KAFKA_OPTS=-javaagent:jmx_prometheus_javaagent-0.18.0.jar=8080:kafka-3_0_0.yml
+2.1. Start zookeeper
+./zookeeper-server-start  ../etc/kafka/zookeeper.properties
+2.2 export  KAFKA_OPTS=-javaagent:jmx_prometheus_javaagent-0.18.0.jar=8080:kafka-3_0_0.yml
 3. ./kafka-server-start ../etc/kafka/server.properties
 4. Once after we start the Kafka broker if we launch the http://localhost:8080/metrics url it should show 
     as metrics endpoint with the list of metrics.
