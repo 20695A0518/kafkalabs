@@ -9,19 +9,26 @@ CERTIFICATE_INFO="CN=$KAFKA_HOST,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX"
 CA_INFO="/C=XX/ST=kafka/L=kafka/O=kafka/OU=kafka/CN=$KAFKA_HOST/"
 
 
-###Create CA and server keystore/truststore###
+###Step 1: Generate a self-signed CA certificate and private key###
+
 openssl req -new -x509 -keyout ca-key -out ca-cert -days $VALIDITY -subj $CA_INFO -passout pass:$SSLPASSPHRASE
 
+### Step 2: Generate a keystore and private key for the Kafka server ###
 keytool -noprompt -keystore kafka.server.keystore.jks -alias $KAFKA_HOST -validity $VALIDITY -genkey -dname $CERTIFICATE_INFO -keypass $SSLPASSPHRASE -storepass $SSLPASSPHRASE
 
+###Step 3: Import the CA certificate into the Kafka server's truststore###
 keytool -noprompt -keystore kafka.server.truststore.jks -alias CARoot -import -file ca-cert -storepass $SSLPASSPHRASE
 
+###Step 4: Generate a certificate signing request (CSR) for the Kafka server###
 keytool -noprompt -keystore kafka.server.keystore.jks -alias $KAFKA_HOST -certreq -file cert-file-$KAFKA_HOST -storepass $SSLPASSPHRASE
 
+###Step 5: Sign the certificate with the CA###
 openssl x509 -req -CA ca-cert -CAkey ca-key -in cert-file-$KAFKA_HOST -out cert-signed-$KAFKA_HOST -days $VALIDITY -CAcreateserial -passin pass:$SSLPASSPHRASE
 
+###Step 6: Import the CA certificate into the Kafka server's keystore###
 keytool -noprompt -keystore kafka.server.keystore.jks -alias CARoot -import -file ca-cert -storepass $SSLPASSPHRASE
 
+###Step 7: Import the signed certificate into the Kafka server's keystore###
 keytool -noprompt -keystore kafka.server.keystore.jks -alias $KAFKA_HOST -import -file cert-signed-$KAFKA_HOST -storepass $SSLPASSPHRASE
 
 ###Create client keystore and truststore###
@@ -29,12 +36,16 @@ USERNAME=acladmin
 CLIENT_SSLPASSPHRASE=client@123
 CLIENT_CERTIFICATE_INFO="CN=$USERNAME,OU=kafka,O=kafka,L=kafka,ST=kafka,C=XX"
 
+###Step 1: Generate a keystore and private key for the Kafka client###
 keytool -noprompt -keystore kafka.client.keystore.jks -alias $USERNAME -validity $VALIDITY -genkey -dname $CLIENT_CERTIFICATE_INFO -keypass $CLIENT_SSLPASSPHRASE -storepass $CLIENT_SSLPASSPHRASE
 
+###Step 2: Import the CA certificate into the Kafka client's truststore###
 keytool -noprompt -keystore kafka.client.truststore.jks -alias CARoot -import -file ca-cert -storepass $CLIENT_SSLPASSPHRASE
 
+###Step 3: Generate a certificate signing request (CSR) for the Kafka client###
 keytool -noprompt -keystore kafka.client.keystore.jks -alias $USERNAME -certreq -file cert-file-client-$USERNAME -storepass $CLIENT_SSLPASSPHRASE
 
+###Step 4: Sign the certificate with the CA###
 openssl x509 -req -CA ca-cert -CAkey ca-key -in cert-file-client-$USERNAME -out cert-signed-client-$USERNAME -days $VALIDITY -CAcreateserial -passin pass:$SSLPASSPHRASE
 
 ###Add client certificate to server truststore###
