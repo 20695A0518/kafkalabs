@@ -18,7 +18,7 @@ sh kafka-topics.sh --bootstrap-server localhost:9092  --describe  --topic first-
 sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first-topic
 
 6. To consume the messages from the beginning
-sh kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic first-topic --from-beginning
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092  --topic first-topic --group fg1 --from-beginning
 
 7. To get a detailed description about the log file, use a tool kafka-run-class
 sh kafka-run-class.sh  kafka.tools.DumpLogSegments --deep-iteration --print-data-log  --files /tmp/kafka-logs/first-topic-0/00000000000000000000.log
