@@ -1,7 +1,7 @@
 ClusterLab1: Create Multiple Kafka Brokers
 
 1. broker1
-➢ config/server-one.properties
+➢ config/server1.properties
 # The id of the broker. This must be set to a unique integer for each broker.
 broker.id=1
 # The port the socket server listens on
@@ -11,14 +11,25 @@ store log files
 log.dirs=c:/logs/kafka-logs-1
 
 2. broker2
-➢ config/server-two.properties
+➢ config/server2.properties
 # The id of the broker. This must be set to a unique integer for each broker.
 broker.id=2
+# The port the socket server listens on
+port=9093
+# A comma seperated list of directories under which to
+store log files
+log.dirs=c:/logs/kafka-logs-2
+
+3. broker3
+➢ config/server3.properties
+# The id of the broker. This must be set to a unique integer for each broker.
+broker.id=3
 # The port the socket server listens on
 port=9094
 # A comma seperated list of directories under which to
 store log files
-log.dirs=c:/logs/kafka-logs-2
+log.dirs=c:/logs/kafka-logs-3
+
 
 3. Start Multiple Brokers
 
