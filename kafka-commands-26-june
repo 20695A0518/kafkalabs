@@ -52,6 +52,24 @@ consumer-group demo:
 ./kafka-console-consumer  --bootstrap-server localhost:9092 --topic  order-topic --property print.key=true --property key.separator=":" --group og1 --from-beginning
 
 
+Cluster Demo
+-------------
+
+1. Start 3 brokers
+2. Create a cluster-toppic with 3 partitions and replication-factor 3
+
+sh kafka-console-consumer.sh  --bootstrap-server localhost:9092 --topic  cluster-topic --property print.key=true --property key.separator=":"  --group cg1 --from-beginning
+
+sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group cg1
+
+sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic  cluster-topic --property "parse.key=true" --property "key.separator=:"
+1001:laptop
+2001:desktop
+1001:book
+1001:mouse
+2001:speaker
+
+
 
 
 
