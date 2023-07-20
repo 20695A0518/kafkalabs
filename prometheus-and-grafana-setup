@@ -11,7 +11,7 @@ sudo systemctl status prometheus
     we interface using default URL http://localhost:9090/
 6. Start Graphana Server:
 sudo systemctl start grafana-server
-Graphana login URL   http://localhost:3000/login  (default user:admin, password:admin)
+Graphana login URL   http://localhost:3000/login  (default user:admin, password:admin123)
 
 Note : if password is not working, please try
 sudo grafana-cli admin reset-admin-password <new-password>
