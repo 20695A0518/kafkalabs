@@ -61,6 +61,16 @@ replica.lag.time.max.ms: This property specifies the maximum time that a followe
 If a follower is lagging by more than this amount of time, it will trigger a rebalance to redistribute the partitions among the available replicas.
 The default value is 10,000 ms (10 seconds), but it can be increased or decreased based on the expected replication delay and the desired consistency level.
 
+unclean.leader.election.enable
+Indicates whether to enable replicas not in the ISR set to be elected as leader as a last resort, even though doing so may result in data loss
+
+Type:	boolean
+Default:	false
+Valid Values:	
+Importance:	high
+Update Mode:	cluster-wide
+
+
 
 
 log.cleanup.policy
