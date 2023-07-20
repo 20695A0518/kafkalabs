@@ -73,7 +73,7 @@ ssl.client.auth=required
 ssl.enabled.protocols=TLSv1.2,TLSv1.1,TLSv1
 
 
-3. create a file client-ssl-auth.properties
+3. create a file client-ssl-auth.properties  (create the file in kafka/bin )
 security.protocol=SSL 
 ssl.truststore.location=/home/ubuntu/Desktop/kafka/ssl/kafka.client.truststore.jks 
 ssl.truststore.password=client@123
