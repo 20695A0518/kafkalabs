@@ -93,4 +93,12 @@ The heartbeat interval is configurable and can be set by the consumer using the 
 parameter session.timeout.ms (default: 10 seconds) and max.poll.interval.ms (default: 5 minutes).
 
 
+auto.leader.rebalance.enable
+Enables auto leader balancing. A background thread checks the distribution of partition leaders at regular intervals, configurable by `leader.imbalance.check.interval.seconds`. If the leader imbalance exceeds `leader.imbalance.per.broker.percentage`, leader rebalance to the preferred leader for partitions is triggered.
+
+Type:	boolean
+Default:	true
+Valid Values:	
+Importance:	high
+Update Mode:	read-only
 
