@@ -73,6 +73,12 @@ Maven dependency for Apache Storm:
     <version>2.2.0</version> <!-- Replace with the desired version -->
 </dependency>
 
+<dependency>
+    <groupId>org.apache.storm</groupId>
+    <artifactId>storm-kafka-client</artifactId>
+    <version>2.2.0</version> <!-- Replace with the version compatible with your Storm version -->
+</dependency>
+
 
 
 
