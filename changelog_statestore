@@ -1,0 +1,23 @@
+
+In Kafka Streams, a changelog topic is used to persist the state of the stream processing application. It stores the updates to the state store, allowing the application to 
+recover its state in case of failures or restarts. On the other hand, a state store is an in-memory database that holds the current state of the stream processing application.
+It's used for fast read and write operations during stream processing. So, in summary:
+
+Changelog Topic: Persists the state of the application for fault tolerance and state recovery.
+
+State Store: In-memory database holding the current state of the application for fast read and write operations.
+
+The changelog topic and state store work together to ensure fault tolerance and consistency in stream processing applications.
+
+
+n Kafka Streams, a changelog topic is used to persist the state of the stream processing application. It stores the updates to the state store, allowing the application to 
+recover its state in case of failures or restarts. On the other hand, a state store is an in-memory database that holds the current state of the stream processing application.
+It's used for fast read and write operations during stream processing. So, in summary:
+
+Changelog Topic: Persists the state of the application for fault tolerance and state recovery.
+
+State Store: In-memory database holding the current state of the application for fast read and write operations.
+
+The changelog topic and state store work together to ensure fault tolerance and consistency in stream processing applications.
+
+
