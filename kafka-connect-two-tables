@@ -14,8 +14,11 @@
         "incrementing.column.name": "id", // Assuming you have an incrementing column for both tables
         "validate.non.null": "false",
         "topic.prefix": "mysql-",
-        "transforms": "createKey,extractInt",
+         "transforms": "createKey,extractInt",
         "transforms.createKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+        "transforms.createKey.fields": "id",
+        "transforms.extractInt.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+        "transforms.extractInt.field": "id"
 
     }
 }
