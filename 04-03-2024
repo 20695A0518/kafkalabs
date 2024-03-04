@@ -28,6 +28,11 @@ Describe the group
 
 sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group tg1
 
+To reset the offsets to the beginning of each partition
+
+sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group tg3  --reset-offsets --to-earliest --execute --topic test-topic
+
+
 
 
 
