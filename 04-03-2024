@@ -17,6 +17,12 @@ sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first-top
 To run a console consumer
 sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first-topic --from-beginning
 
+To display the logs in readable format
+sh kafka-run-class.sh kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files  /tmp/kafka-logs/test-topic-0/00000000000000000000.log
+
+
+
+
 
 
 
