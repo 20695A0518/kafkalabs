@@ -1,0 +1,90 @@
+import org.apache.kafka.clients.producer.*;
+import java.util.Properties;
+
+public class KafkaProducerExample {
+    public static void main(String[] args) {
+        // Kafka producer properties
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        // Create Kafka producer
+        Producer<String, String> producer = new KafkaProducer<>(props);
+
+        // Send messages to test-topic
+        String topic = "test-topic";
+        int numPartitions = 3;
+
+        for (int i = 0; i < 10; i++) {
+            String message = "Message " + i;
+
+            // Send message without specifying partition or key
+            producer.send(new ProducerRecord<>(topic, message), new Callback() {
+                @Override
+                public void onCompletion(RecordMetadata metadata, Exception exception) {
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    } else {
+                        System.out.println("Message sent to partition " + metadata.partition()
+                                + " with offset " + metadata.offset());
+                    }
+                }
+            });
+        }
+
+        // Close producer
+        producer.close();
+    }
+}
+
+
+
+
+
+import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.common.TopicPartition;
+import java.util.Collections;
+import java.util.Properties;
+
+public class KafkaConsumerExample {
+    public static void main(String[] args) {
+        // Kafka consumer properties
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("group.id", "test-consumer-group");
+        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+
+        // Create Kafka consumer
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+
+        // Subscribe to the topic
+        String topic = "test-topic";
+        consumer.subscribe(Collections.singletonList(topic));
+
+        try {
+            // Poll for new messages
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(1000);
+
+                // Process received records
+                for (ConsumerRecord<String, String> record : records) {
+                    System.out.println("Received message: " + record.value()
+                            + " from partition " + record.partition()
+                            + " with offset " + record.offset());
+                }
+
+                // Get assigned partitions
+                for (TopicPartition partition : consumer.assignment()) {
+                    System.out.println("Consumer assigned to partition " + partition.partition());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the consumer on exit
+            consumer.close();
+        }
+    }
+}
