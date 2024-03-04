@@ -33,6 +33,12 @@ To reset the offsets to the beginning of each partition
 sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group tg3  --reset-offsets --to-earliest --execute --topic test-topic
 
 
+Check offset for given timestamp
+
+sh kafka-run-class.sh  kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic test-topic --time 1709548873002
+
+
+
 
 
 
