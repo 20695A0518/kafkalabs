@@ -8,4 +8,16 @@ To create a topic:
 sh kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first-topic --partitions 1 --replication-factor 1
 
 To describe a topic
+
 sh kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic first-topic
+
+To run a console producer
+sh kafka-console-producer.sh --bootstrap-server localhost:9092 --topic first-topic
+
+To run a console consumer
+sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first-topic --from-beginning
+
+
+
+
+
