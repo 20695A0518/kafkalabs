@@ -26,7 +26,7 @@ sh kafka-run-class.sh kafka.tools.GetOffsetShell --bootstrap-server localhost:90
 
 Describe the group
 
-kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group tg1
+sh kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group tg1
 
 
 
