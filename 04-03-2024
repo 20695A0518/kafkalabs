@@ -20,6 +20,13 @@ sh kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first-top
 To display the logs in readable format
 sh kafka-run-class.sh kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files  /tmp/kafka-logs/test-topic-0/00000000000000000000.log
 
+To display the log end offset for each partition
+
+sh kafka-run-class.sh kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic test-topic
+
+
+
+
 
 
 
