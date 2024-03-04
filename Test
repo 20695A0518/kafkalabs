@@ -88,3 +88,49 @@ public class KafkaConsumerExample {
         }
     }
 }
+
+
+
+import org.apache.kafka.clients.producer.*;
+import org.apache.kafka.common.serialization.StringSerializer;
+import java.util.Properties;
+
+public class KafkaProducerExampleWithKey {
+    public static void main(String[] args) {
+        // Kafka producer properties
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+        // Create Kafka producer
+        Producer<String, String> producer = new KafkaProducer<>(props);
+
+        // Send messages to test-topic
+        String topic = "test-topic";
+        int numPartitions = 3;
+
+        for (int i = 0; i < 10; i++) {
+            String key = "Key-" + i;
+            String message = "Message " + i;
+
+            // Send message with key
+            producer.send(new ProducerRecord<>(topic, key, message), new Callback() {
+                @Override
+                public void onCompletion(RecordMetadata metadata, Exception exception) {
+                    if (exception != null) {
+                        exception.printStackTrace();
+                    } else {
+                        System.out.println("Message sent to partition " + metadata.partition()
+                                + " with offset " + metadata.offset());
+                    }
+                }
+            });
+        }
+
+        // Close producer
+        producer.close();
+    }
+}
+
+
