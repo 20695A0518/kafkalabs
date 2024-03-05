@@ -135,6 +135,7 @@ public class KafkaProducerExampleWithKey {
 
 
 
+
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.*;
@@ -154,24 +155,23 @@ public class KafkaProducerExampleWithSameKey {
         // Send messages to test-topic
         String topic = "test-topic";
    
-
-        // Create a map with account transactions
-        Map<String, Double> accountTransactions = new HashMap<>();
-        accountTransactions.put("account1", 100.0);
-        accountTransactions.put("account2", 500.0);
-        accountTransactions.put("account3", 200.0);
-        accountTransactions.put("account1", 500.0);
-        accountTransactions.put("account2", 250.0);
-        accountTransactions.put("account3", 300.0);
-        accountTransactions.put("account1", 200.0);
-        accountTransactions.put("account2", 350.0);
-        accountTransactions.put("account3", 400.0);
-        accountTransactions.put("account1", 600.0);
-        accountTransactions.put("account2", 750.0);
-        accountTransactions.put("account3", 800.0);
+        // Create a list to hold account transactions
+        List<Map.Entry<String, Double>> accountTransactions = new ArrayList<>();
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account1", 100.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account2", 500.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account3", 200.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account1", 500.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account2", 250.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account3", 300.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account1", 200.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account2", 350.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account3", 400.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account1", 600.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account2", 750.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account3", 800.0));
 
         // Sending each account transaction to Kafka
-        for (Map.Entry<String, Double> entry : accountTransactions.entrySet()) {
+        for (Map.Entry<String, Double> entry : accountTransactions) {
             String key = entry.getKey();
             Double value = entry.getValue();
             String message = key + ":" + value;
