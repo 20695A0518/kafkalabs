@@ -5,7 +5,7 @@ public class KafkaProducerExample {
     public static void main(String[] args) {
         // Kafka producer properties
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("bootstrap.servers", "localhost:9092");  
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
@@ -51,7 +51,7 @@ public class KafkaConsumerExample {
     public static void main(String[] args) {
         // Kafka consumer properties
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("bootstrap.servers", "localhost:9092");  
         props.put("group.id", "test-consumer-group");
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
@@ -99,7 +99,7 @@ public class KafkaProducerExampleWithKey {
     public static void main(String[] args) {
         // Kafka producer properties
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("bootstrap.servers", "localhost:9092");  
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
@@ -108,7 +108,7 @@ public class KafkaProducerExampleWithKey {
 
         // Send messages to test-topic
         String topic = "test-topic";
-        int numPartitions = 3;
+     
 
         for (int i = 0; i < 10; i++) {
             String key = "Key-" + i;
@@ -140,11 +140,11 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-public class KafkaProducerExampleWithKey {
+public class KafkaProducerExampleWithSameKey {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         // Kafka producer properties
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092"); // Change it to your Kafka broker's address
+        props.put("bootstrap.servers", "localhost:9092");  
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 
@@ -153,7 +153,7 @@ public class KafkaProducerExampleWithKey {
 
         // Send messages to test-topic
         String topic = "test-topic";
-        int numPartitions = 3;
+   
 
         // Create a map with account transactions
         Map<String, Double> accountTransactions = new HashMap<>();
