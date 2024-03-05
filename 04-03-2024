@@ -37,6 +37,10 @@ Check offset for given timestamp
 
 sh kafka-run-class.sh  kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic test-topic --time 1709548873002
 
+add a config to the existing topic
+sh kafka-configs.sh --bootstrap-server localhost:9092 --entity-type topics --entity-name cluster-topic --add-config min.insync.replicas=3 --alter
+
+
 
 
 
