@@ -155,7 +155,7 @@ public class KafkaProducerExampleWithSameKey {
         // Send messages to test-topic
         String topic = "test-topic";
    
-        // Create a list to hold account transactions
+           // Create a list to hold account transactions
         List<Map.Entry<String, Double>> accountTransactions = new ArrayList<>();
         accountTransactions.add(new AbstractMap.SimpleEntry<>("account1", 100.0));
         accountTransactions.add(new AbstractMap.SimpleEntry<>("account2", 500.0));
@@ -169,6 +169,12 @@ public class KafkaProducerExampleWithSameKey {
         accountTransactions.add(new AbstractMap.SimpleEntry<>("account1", 600.0));
         accountTransactions.add(new AbstractMap.SimpleEntry<>("account2", 750.0));
         accountTransactions.add(new AbstractMap.SimpleEntry<>("account3", 800.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account14", 600.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account14", 750.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account15", 800.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account15", 600.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account7", 750.0));
+        accountTransactions.add(new AbstractMap.SimpleEntry<>("account7", 800.0));
 
         // Sending each account transaction to Kafka
         for (Map.Entry<String, Double> entry : accountTransactions) {
