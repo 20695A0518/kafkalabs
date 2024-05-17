@@ -6,7 +6,7 @@ EXAMPLE-1
   KStream<String, String> sourceStream = builder.stream("input-topic");
 
  // Branch the stream based on message content
- KStream<String, String>[] branches = sourceStream.branch(
+ KStream<String, String>[] branches = sourceStream.split().branch(
  (key, value) -> value.contains("type1"), // condition for first output topic
  (key, value) -> value.contains("type2"), // condition for second output topic
  (key, value) -> true                     // default condition for remaining messages
