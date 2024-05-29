@@ -1,10 +1,13 @@
 To start Zookeeper:
+kafka/bin/windows> zookeeper-server-start.bat ../../config/zookeeper.properties
 sh zookeeper-server-start.sh ../config/zookeeper.properties
 
 To start Kafka:
+kafka/bin/windows> zookeeper-server-start.bat ../../config/server.properties
 sh kafka-server-start.sh  ../config/server.properties
 
 To create a topic:
+kafka/bin/windows> kafka-topics.bat --bootstrap-server localhost:9092 --create --topic first-topic --partitions 1 --replication-factor 1
 sh kafka-topics.sh --bootstrap-server localhost:9092 --create --topic first-topic --partitions 1 --replication-factor 1
 
 To describe a topic
