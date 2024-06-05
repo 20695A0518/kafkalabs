@@ -1,0 +1,2 @@
+{"value_schema": "{\"type\": \"record\", \"name\": \"User\", \"fields\": [{\"name\": \"name\", \"type\": \"string\"}, {\"name\": \"phone\", \"type\": \"string\", \"default\": \"1234567890\"}]}", "records": 
+[{"value": {"name": "testUser2","phone": "1234567890"}}]}
