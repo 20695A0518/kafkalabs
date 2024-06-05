@@ -3,7 +3,7 @@ kafka/bin/windows> zookeeper-server-start.bat ../../config/zookeeper.properties
 sh zookeeper-server-start.sh ../config/zookeeper.properties
 
 To start Kafka:
-kafka/bin/windows> zookeeper-server-start.bat ../../config/server.properties
+kafka/bin/windows> kafka-server-start.bat ../../config/server.properties
 sh kafka-server-start.sh  ../config/server.properties
 
 To create a topic:
