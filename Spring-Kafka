@@ -1,0 +1,186 @@
+// Record Mode
+
+@Component
+class KafkaMessageListener implements AcknowledgingMessageListener<String, String> {
+
+   
+    @KafkaListener(topics = "your_topic", groupId = "your_group_id")
+    public void onMessage(ConsumerRecord<String, String> consumerRecord, Acknowledgment acknowledgment) {
+        try {
+            // Process the message
+            String message = consumerRecord.value();
+            System.out.println("Received message: " + message);
+
+            // Business logic processing
+
+            // Commit offset for this record
+            acknowledgment.acknowledge();
+        } catch (Exception e) {
+            // Handle exception
+            e.printStackTrace();
+        }
+    }
+}
+
+@Configuration
+class KafkaConfig {
+
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+
+    @Bean
+    public Map<String, Object> consumerConfigs() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "your_group_id");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        return props;
+    }
+
+    @Bean
+    public ConsumerFactory<String, String> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        factory.setBatchListener(false); // Make sure batch listening is disabled
+        factory.getContainerProperties().setAckMode(AckMode.RECORD); // Set AckMode to RECORD for record-wise commit
+        return factory;
+    }
+}
+
+
+// Batch Mode
+
+
+@Component
+class KafkaMessageListener implements BatchAcknowledgingMessageListener<String, String> {
+
+    @Override
+    @KafkaListener(topics = "your_topic", groupId = "your_group_id")
+    public void onMessage(List<ConsumerRecord<String, String>> consumerRecords, Acknowledgment acknowledgment) {
+        try {
+            for (ConsumerRecord<String, String> consumerRecord : consumerRecords) {
+                // Process each message
+                String message = consumerRecord.value();
+                System.out.println("Received message: " + message);
+                
+                // Business logic processing
+            }
+            
+            // Commit offsets for all records in the batch
+            acknowledgment.acknowledge();
+        } catch (Exception e) {
+            // Handle exception
+            e.printStackTrace();
+        }
+    }
+}
+
+@Configuration
+class KafkaConfig {
+
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+
+    @Bean
+    public Map<String, Object> consumerConfigs() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "your_group_id");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        return props;
+    }
+
+    @Bean
+    public ConsumerFactory<String, String> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        factory.setBatchListener(true); // Enable batch listening
+        return factory;
+    }
+}
+
+// Commit all poll records
+
+@Component
+class KafkaMessageListener implements AcknowledgingMessageListener<String, String> {
+
+    private static final int BATCH_SIZE = 10; // Size of the record pool
+    private List<ConsumerRecord<String, String>> recordPool = new ArrayList<>();
+
+    @Override
+    @KafkaListener(topics = "your_topic", groupId = "your_group_id")
+    public void onMessage(ConsumerRecord<String, String> consumerRecord, Acknowledgment acknowledgment) {
+        try {
+            recordPool.add(consumerRecord); // Add record to the pool
+
+            if (recordPool.size() >= BATCH_SIZE) {
+                processAndCommitBatch(acknowledgment); // Process and commit batch if pool is full
+            }
+        } catch (Exception e) {
+            // Handle exception
+            e.printStackTrace();
+        }
+    }
+
+    private void processAndCommitBatch(Acknowledgment acknowledgment) {
+        // Process records in the pool
+        for (ConsumerRecord<String, String> record : recordPool) {
+            String message = record.value();
+            System.out.println("Received message: " + message);
+            // Business logic processing
+        }
+
+        // Commit offsets for all records in the batch
+        acknowledgment.acknowledge();
+
+        // Clear the pool after processing and committing
+        recordPool.clear();
+    }
+}
+
+@Configuration
+class KafkaConfig {
+
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+
+    @Bean
+    public Map<String, Object> consumerConfigs() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "your_group_id");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        return props;
+    }
+
+    @Bean
+    public ConsumerFactory<String, String> consumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        factory.getContainerProperties().setAckMode(AckMode.MANUAL); // Set AckMode to MANUAL for manual commit
+        return factory;
+    }
+}
+
+
