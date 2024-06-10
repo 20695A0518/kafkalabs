@@ -7,3 +7,5 @@
 ./kafka-run-class kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic first-topic
 
 ./kafka-consumer-groups --bootstrap-server localhost:9092 --group fg3 --reset-offsets --to-earliest --execute --topic first-topic
+
+./kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group fg1
