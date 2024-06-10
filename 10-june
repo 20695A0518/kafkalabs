@@ -5,3 +5,5 @@
 ./kafka-run-class  kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files  /home/ubuntu/Desktop/kafka/logs/confluent.768846/kafka/data/first-topic-0/00000000000000000000.log
 
 ./kafka-run-class kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic first-topic
+
+./kafka-consumer-groups --bootstrap-server localhost:9092 --group fg3 --reset-offsets --to-earliest --execute --topic first-topic
