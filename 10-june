@@ -3,3 +3,5 @@
 ./kafka-console-consumer --bootstrap-server localhost:9092 --topic test-topic --from-beginning
 
 ./kafka-run-class  kafka.tools.DumpLogSegments --deep-iteration --print-data-log --files  /home/ubuntu/Desktop/kafka/logs/confluent.768846/kafka/data/first-topic-0/00000000000000000000.log
+
+./kafka-run-class kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic first-topic
