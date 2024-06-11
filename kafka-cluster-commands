@@ -32,18 +32,18 @@ log.dirs=c:/logs/kafka-logs-3
 
 3.1 Start Zookeeper
 
-bin/zookeeper-server-start.bat ../../config/zookeeper.properties
+bin/windows> zookeeper-server-start.bat ../../config/zookeeper.properties
 
 3.2 Start Multiple Brokers
 
 Broker1
-bin/kafka-server-start.bat ../../config/server1.properties
+bin/windows> kafka-server-start.bat ../../config/server1.properties
 
 Broker2
-bin/kafka-server-start.bat ../../config/server2.properties
+bin/windows> kafka-server-start.bat ../../config/server2.properties
 
 Broker3
-bin/kafka-server-start.bat ../../config/server3.properties
+bin/windows> kafka-server-start.bat ../../config/server3.properties
 
 4. Creating a Topic
 bin/kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 3 --topic failover
