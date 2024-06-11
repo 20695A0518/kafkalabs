@@ -30,8 +30,11 @@ port=9094
 store log files
 log.dirs=c:/logs/kafka-logs-3
 
+3.1 Start Zookeeper
 
-3. Start Multiple Brokers
+bin/zookeeper-server-start.bat ../../config/zookeeper.properties
+
+3.2 Start Multiple Brokers
 
 Broker1
 bin/kafka-server-start.bat ../../config/server1.properties
