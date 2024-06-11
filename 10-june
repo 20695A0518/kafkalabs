@@ -9,3 +9,5 @@
 ./kafka-consumer-groups --bootstrap-server localhost:9092 --group fg3 --reset-offsets --to-earliest --execute --topic first-topic
 
 ./kafka-consumer-groups --bootstrap-server localhost:9092 --describe --group fg1
+
+sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --create --topic cluster-topic --partitions 3 --replication-factor 3
