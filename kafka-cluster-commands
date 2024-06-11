@@ -1,4 +1,17 @@
+1. Install jdk 11/17/21
+
+2. Set environment variable
+JAVA_HOME -> C:/JDK/JDK11
+
+3. Download kafka software
+https://kafka.apache.org/downloads -> Binary downloads -> Scala 2.13  - kafka_2.13-3.7.0.tgz (asc, sha512)
+
+4. Extract the zip file directly into C:\kafka_2.13-3.7.0
+
 ClusterLab1: Create Multiple Kafka Brokers
+==========================================
+
+* three copies of  server.properties file -> server1.properties, server2.properties, server3.properties
 
 1. broker1
 ➢ config/server1.properties
