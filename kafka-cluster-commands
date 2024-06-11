@@ -2,6 +2,9 @@
 
 2. Set environment variable
 JAVA_HOME -> C:/JDK/JDK11
+PATH -> C:/JDK/JDK11/bin
+
+* Test the java version in the command prompt (C:\> java -version)
 
 3. Download kafka software
 https://kafka.apache.org/downloads -> Binary downloads -> Scala 2.13  - kafka_2.13-3.7.0.tgz (asc, sha512)
