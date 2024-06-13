@@ -1,0 +1,3 @@
+To list topics:
+./kafka-topics --bootstrap-server localhost:9092 --list
+curl "http://localhost:8082/topics"
