@@ -26,3 +26,12 @@ sh kafka-configs.sh --bootstrap-server localhost:9092 --entity-type topics --ent
 
 ./kafka-topics --bootstrap-server localhost:9092 --list
 curl "http://localhost:8082/topics" | jq
+
+
+sh kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092,localhost:9093 \
+  --topic cluster-topic \
+  --group cg1 \
+  --from-beginning \
+  --property "print.key=true" \
+  --property "key.separator=:"
