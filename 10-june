@@ -35,3 +35,8 @@ sh kafka-console-consumer.sh \
   --from-beginning \
   --property "print.key=true" \
   --property "key.separator=:"
+
+
+Check offset for given timestamp
+
+sh kafka-run-class.sh  kafka.tools.GetOffsetShell --bootstrap-server localhost:9092 --topic test-topic --time 1709548873002
