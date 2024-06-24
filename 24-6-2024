@@ -1,3 +1,7 @@
 sh zookeeper-server-start.sh ../config/zookeeper.properties
 
 sh zookeeper-shell.sh localhost:2181
+
+ sh kafka-server-start.sh ../config/server1.properties 
+ sh kafka-server-start.sh ../config/server2.properties 
+ sh kafka-server-start.sh ../config/server3.properties 
