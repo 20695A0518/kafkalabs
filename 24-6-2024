@@ -11,3 +11,7 @@ sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --create --t
 sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --describe --topic cluster-topic
 
 sh kafka-configs.sh --bootstrap-server localhost:9092 --entity-type topics --entity-name cluster-topic --add-config min.insync.replicas=3 --alter
+
+    props.put(ProducerConfig.ACKS_CONFIG, "all");
+        props.put(ProducerConfig.RETRIES_CONFIG, 100);
+        props.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG,5000);
