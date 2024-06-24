@@ -9,3 +9,5 @@ sh zookeeper-shell.sh localhost:2181
 sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --create --topic cluster-topic --partitions 3 --replication-factor 3
 
 sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --describe --topic cluster-topic
+
+sh kafka-configs.sh --bootstrap-server localhost:9092 --entity-type topics --entity-name cluster-topic --add-config min.insync.replicas=3 --alter
