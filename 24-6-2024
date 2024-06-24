@@ -7,3 +7,5 @@ sh zookeeper-shell.sh localhost:2181
  sh kafka-server-start.sh ../config/server3.properties 
 
 sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --create --topic cluster-topic --partitions 3 --replication-factor 3
+
+sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --describe --topic cluster-topic
