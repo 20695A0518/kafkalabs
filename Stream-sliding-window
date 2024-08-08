@@ -59,9 +59,6 @@ purchaseCounts.toStream().foreach((key, value) -> System.out.println(key.key() +
 3. Session windows: In session windows, the data is grouped based on the session of the user. A session is a sequence of events that 
 occur within a specified time interval, where the time between two consecutive events does not exceed a threshold value.
 
-4. Global windows: In global windows, all the data in the stream is processed as a single window. This type of window is useful when you 
-want to calculate the aggregate value for the entire stream.
-
 
 Sessions Windows:
 Suppose we are processing a stream of user clicks on a website. We want to group the clicks by user session and calculate the total 
