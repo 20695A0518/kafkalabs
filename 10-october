@@ -2,3 +2,4 @@ sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --create --t
 
 sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --describe  --topic cluster-topic 
 
+insert into foobar (c1,c2) values(4,'nature');
