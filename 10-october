@@ -5,3 +5,6 @@ sh kafka-topics.sh --bootstrap-server localhost:9092,localhost:9093 --describe  
 insert into foobar (c1,c2) values(4,'nature');
 
 update foobar set c2='prayer' where c1=4;
+
+{"value_schema": "{\"type\": \"record\", \"name\": \"User\", \"fields\": [{\"name\": \"name\", \"type\": \"string\"}, {\"name\": \"phone\", \"type\": \"string\", \"default\": \"1234567890\"}]}", "records": 
+[{"value": {"name": "ramana","phone": "1234567890"}}]}
